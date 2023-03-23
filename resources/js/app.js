@@ -15,12 +15,9 @@ import { createApp } from "vue";
 
 const app = createApp({});
 
-import Home from "./components/Home.vue";
-import StatsBrazil from "./components/StatsBrazil.vue";
+import StatesTable from "./components/StatesTable.vue";
 
-app.component("Home", Home);
-
-app.component("stats-brazil", StatsBrazil);
+app.component("states-table", StatesTable);
 
 /**
  * The following block of code may be used to automatically register your

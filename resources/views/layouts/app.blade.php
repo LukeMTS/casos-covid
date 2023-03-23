@@ -16,7 +16,7 @@
     @yield('styles')
 </head>
 
-<body class="bg-secondary">
+<body class="bg-dark">
     <div id="app">
         <main class="container py-4">
             @yield('content')
