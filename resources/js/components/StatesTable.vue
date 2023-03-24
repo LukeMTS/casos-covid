@@ -1,43 +1,53 @@
 <template>
     <div class="row">
-        <div class="card text-white mb-3" :class="data.color">
-            <div class="card-header">
-                <h1 class="text-center">{{ data.country }}</h1>
-            </div>
-            <div class="card-body">
-                <div class="container table text-white">
-                    <div class="row fw-bold">
-                        <div class="col-4">#</div>
-                        <div class="col-4">Heading 1</div>
-                        <div class="col-4">Heading 2</div>
-                    </div>
-                    <div
-                        class="row table-row py-2 my-2"
-                        v-for="(state, index) in data.states"
-                        data-bs-toggle="collapse"
-                        :data-bs-target="`#r${index}`"
-                    >
-                        <div class="col-4">{{ state.name }}</div>
-                        <div class="col-4">{{ state.number }}</div>
-                        <div class="col-4">zzzzz</div>
+        <div class="col">
+            <div class="card mb-3">
+                <h1 class="card-header text-center">
+                    {{ data.states[0].Pais }}
+                </h1>
+                <div class="card-body">
+                    <div class="container table">
+                        <div class="row justify-content-center fw-bold">
+                            <div class="col-1">#</div>
+                            <div class="col-3">Estado</div>
+                            <div class="col-3 text-center">Casos totais</div>
+                            <div class="col-3 text-center">
+                                Mortes confirmadas
+                            </div>
+                        </div>
                         <div
-                            class="row collapse accordion-collapse"
-                            :id="`r${index}`"
-                            data-bs-parent=".table"
+                            class="row justify-content-center table-row py-3"
+                            v-for="(state, index) in data.states"
+                            data-bs-toggle="collapse"
+                            :data-bs-target="`#r${index}`"
                         >
-                            <div class="col">
-                                {{ data.country }} .. This is the first item's
-                                accordion body. It is shown by default, until
-                                the collapse plugin adds the appropriate classes
-                                that we use to style each element. These classes
-                                control the overall appearance,
-                                {{ data.number }}
-                                hiding via CSS transitions. You can modify any
-                                of this with custom CSS or overriding our
-                                default variables. It's also worth noting that
-                                just about any HTML can go within the
-                                .accordion-body, though the transition does
-                                limit overflow.
+                            <div class="col-1">{{ state.id }}</div>
+                            <div class="col-3">
+                                <span class="underline fromLeft">{{
+                                    state.ProvinciaEstado
+                                }}</span>
+                            </div>
+                            <div class="col-3 text-center">
+                                <span class="underline fromLeft">{{
+                                    state.Confirmados
+                                }}</span>
+                            </div>
+                            <div class="col-3 text-center">
+                                <span class="underline fromLeft">{{
+                                    state.Mortos
+                                }}</span>
+                            </div>
+                            <div
+                                class="row collapse accordion-collapse"
+                                :id="`r${index}`"
+                                data-bs-parent=".table"
+                            >
+                                <div class="col">
+                                    <BarChart
+                                        :cases="state.Confirmados"
+                                        :deaths="state.Mortos"
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -48,12 +58,15 @@
 </template>
 
 <script>
+import BarChart from "./BarChart.vue";
+
 export default {
-    props: ["data"],
+    props: ["propData"],
+    components: { BarChart },
     data() {
         return {
             selectedRowIndex: -1,
-            data: JSON.parse(this.data),
+            data: JSON.parse(this.propData),
         };
     },
     methods: {
@@ -73,9 +86,30 @@ export default {
     cursor: pointer;
 }
 
-.table-row[aria-expanded="true"],
-.table-row:hover {
-    border: 2px solid white;
-    border-radius: 10px;
+.underline {
+    cursor: pointer;
+    color: #666;
+    margin: 0;
+    text-transform: uppercase;
+    display: inline-block;
+}
+
+.underline:after {
+    display: block;
+    content: "";
+    border-bottom: solid 1px black;
+    transform: scaleX(0);
+    transition: transform 250ms ease-in-out;
+}
+.table-row[aria-expanded="true"] .accordion-collapse {
+    background-color: #f2f2f2;
+}
+
+.underline:hover:after {
+    transform: scaleX(1);
+}
+
+.underline.fromLeft:after {
+    transform-origin: 0% 50%;
 }
 </style>

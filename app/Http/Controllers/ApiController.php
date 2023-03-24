@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Contracts\View\View;
@@ -19,27 +20,21 @@ class ApiController extends Controller
         return view('home');
     }
 
+    public function getDataByCountry(string $country): array
+    {
+        return Http::get('https://dev.kidopilabs.com.br/exercicio/covid.php?pais=' . $country)->json();
+    }
+
     public function dashboard(string $country): View
     {
-        $states = [
-            [
-                'name' => "teste",
-                'number' => 123,
-            ],
-            [
-                'name' => "teste222",
-                'number' => 123,
-            ],
-            [
-                'name' => "teste33",
-                'number' => 123,
-            ],
-        ];
 
-        $data = json_encode(['country' => $country, 'color' => self::countryColors[$country], 'states' => $states]);
+        $states = $this->getDataByCountry($country);
+
+        $data = json_encode(['color' => self::countryColors[$country], 'states' => $states]);
 
         return view('dashboard', compact('data'));
     }
+
 
     public function stats(): View
     {

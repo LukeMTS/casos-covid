@@ -5,5 +5,5 @@
 @endsection
 
 @section('content')
-    <states-table data="{{ $data }}" />
+    <states-table prop-data="{{ $data }}" />
 @endsection
