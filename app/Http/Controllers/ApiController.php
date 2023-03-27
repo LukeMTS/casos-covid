@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ApiLog;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -20,6 +21,26 @@ class ApiController extends Controller
         return view('home');
     }
 
+    public function compare(): View
+    {
+        $data = $this->getAllCountries();
+
+        return view('compare', compact('data'));
+    }
+
+    public function compareCountries(Request $request): array
+    {
+        $data[] = $this->getDataByCountry($request->country1);
+        $data[] = $this->getDataByCountry($request->country2);
+
+        return $data;
+    }
+
+    public function getAllCountries(): array
+    {
+        return Http::get('https://dev.kidopilabs.com.br/exercicio/covid.php?listar_paises=1')->json();
+    }
+
     public function getDataByCountry(string $country): array
     {
         return Http::get('https://dev.kidopilabs.com.br/exercicio/covid.php?pais=' . $country)->json();
@@ -27,17 +48,14 @@ class ApiController extends Controller
 
     public function dashboard(string $country): View
     {
-
         $states = $this->getDataByCountry($country);
 
-        $data = json_encode(['color' => self::countryColors[$country], 'states' => $states]);
+        if (count($states) > 0) {
+            $lastLog = ApiLog::create(['country' => $country, 'last_access' => now()]);
+        }
+
+        $data = ['color' => self::countryColors[$country], 'states' => $states, 'lastLog' => $lastLog];
 
         return view('dashboard', compact('data'));
-    }
-
-
-    public function stats(): View
-    {
-        return view('stats.brazil');
     }
 }

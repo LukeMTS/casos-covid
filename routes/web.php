@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\ApiController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Http;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,13 +16,8 @@ use Illuminate\Support\Facades\Http;
 
 Route::get('/api-exemplo', [ApiController::class]);
 
-// Route::get('/test', function () {
-//     $response = Http::get('https://dev.kidopilabs.com.br/exercicio/covid.php?pais=Brazil')->json();
-//     dd($response);
-// });
-
 Route::get('/', [ApiController::class, 'home']);
 
-Route::get('/{state}', [ApiController::class, 'dashboard'])->name('dashboard');
+Route::get('/country/{state}', [ApiController::class, 'dashboard'])->name('dashboard');
 
-Route::get('/stats/brazil', [ApiController::class, 'stats'])->name('stats');
+Route::get('/compare', [ApiController::class, 'compare'])->name('compare');

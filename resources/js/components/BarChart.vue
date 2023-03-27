@@ -1,6 +1,6 @@
 <template>
     <div class="row justify-content-center">
-        <div class="w-50">
+        <div :class="classes">
             <Bar :options="chartOptions" :data="chartData" />
         </div>
     </div>
@@ -32,7 +32,7 @@ ChartJS.register(
 export default {
     name: "BarChart",
     components: { Bar },
-    props: ["cases", "deaths"],
+    props: ["cases", "deaths", "classes"],
     data() {
         return {
             chartData: {
@@ -40,7 +40,7 @@ export default {
                 datasets: [
                     {
                         label: "Vítimas",
-                        backgroundColor: ["yellow", "red"],
+                        backgroundColor: ["#ffc107", "red"],
                         data: [this.cases, this.deaths],
                     },
                 ],
@@ -48,7 +48,6 @@ export default {
             chartOptions: {
                 responsive: true,
                 plugins: {
-                    label: { color: "green" },
                     legend: {
                         display: false,
                     },

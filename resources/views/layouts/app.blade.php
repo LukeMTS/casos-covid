@@ -13,6 +13,15 @@
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu:400,300,700' rel='stylesheet' type='text/css'>
+    <style>
+        @import url("http://fonts.googleapis.com/css?family=Ubuntu:400,300,700");
+
+        body {
+            font-family: 'Ubuntu', sans-serif !important;
+        }
+    </style>
+
     @yield('styles')
 </head>
 

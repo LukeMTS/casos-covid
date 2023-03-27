@@ -7,8 +7,6 @@
 import "./bootstrap";
 import { createApp } from "vue";
 
-import { Bar } from "vue-chartjs";
-
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
  * registering components with the application instance so they are ready
@@ -18,8 +16,12 @@ import { Bar } from "vue-chartjs";
 const app = createApp({});
 
 import StatesTable from "./components/StatesTable.vue";
+import CountryTable from "./components/CountryTable.vue";
+import CompareTable from "./components/CompareTable.vue";
 
 app.component("states-table", StatesTable);
+app.component("country-table", CountryTable);
+app.component("compare-table", CompareTable);
 
 /**
  * The following block of code may be used to automatically register your

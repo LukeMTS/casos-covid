@@ -2,9 +2,7 @@
     <div class="row">
         <div class="col">
             <div class="card mb-3">
-                <h1 class="card-header text-center">
-                    {{ data.states[0].Pais }}
-                </h1>
+                <h2 class="card-header text-center">Por estado</h2>
                 <div class="card-body">
                     <div class="container table">
                         <div class="row justify-content-center fw-bold">
@@ -24,17 +22,17 @@
                             <div class="col-1">{{ state.id }}</div>
                             <div class="col-3">
                                 <span class="underline fromLeft">{{
-                                    state.ProvinciaEstado
+                                    state.ProvinciaEstado.toLocaleString()
                                 }}</span>
                             </div>
                             <div class="col-3 text-center">
                                 <span class="underline fromLeft">{{
-                                    state.Confirmados
+                                    state.Confirmados.toLocaleString()
                                 }}</span>
                             </div>
                             <div class="col-3 text-center">
                                 <span class="underline fromLeft">{{
-                                    state.Mortos
+                                    state.Mortos.toLocaleString()
                                 }}</span>
                             </div>
                             <div
@@ -46,6 +44,7 @@
                                     <BarChart
                                         :cases="state.Confirmados"
                                         :deaths="state.Mortos"
+                                        classes="w-50"
                                     />
                                 </div>
                             </div>
@@ -88,9 +87,7 @@ export default {
 
 .underline {
     cursor: pointer;
-    color: #666;
     margin: 0;
-    text-transform: uppercase;
     display: inline-block;
 }
 
