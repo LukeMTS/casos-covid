@@ -70,12 +70,16 @@
                             <div class="card-body">
                                 <h5 class="card-title">Taxa de mortes</h5>
                                 <h3>
-                                    <span class="badge text-bg-danger">{{
-                                        (
-                                            countriesData[0].Mortos /
-                                            countriesData[0].Confirmados
-                                        ).toLocaleString()
-                                    }}</span>
+                                    <span class="badge text-bg-danger"
+                                        >{{
+                                            (
+                                                (countriesData[0].Mortos /
+                                                    countriesData[0]
+                                                        .Confirmados) *
+                                                100
+                                            ).toLocaleString()
+                                        }}%</span
+                                    >
                                 </h3>
                             </div>
                         </div>
@@ -98,12 +102,16 @@
                             <div class="card-body">
                                 <h5 class="card-title">Taxa de mortes</h5>
                                 <h3>
-                                    <span class="badge text-bg-danger">{{
-                                        (
-                                            countriesData[1].Mortos /
-                                            countriesData[1].Confirmados
-                                        ).toLocaleString()
-                                    }}</span>
+                                    <span class="badge text-bg-danger"
+                                        >{{
+                                            (
+                                                (countriesData[1].Mortos /
+                                                    countriesData[1]
+                                                        .Confirmados) *
+                                                100
+                                            ).toLocaleString()
+                                        }}%</span
+                                    >
                                 </h3>
                             </div>
                         </div>
@@ -117,14 +125,19 @@
                                     Diferença da taxa de mortes
                                 </h5>
                                 <h3>
-                                    <span class="badge text-bg-warning">{{
-                                        (
-                                            countriesData[1].Mortos /
-                                                countriesData[1].Confirmados -
-                                            countriesData[0].Mortos /
-                                                countriesData[0].Confirmados
-                                        ).toLocaleString()
-                                    }}</span>
+                                    <span class="badge text-bg-warning"
+                                        >{{
+                                            (
+                                                (countriesData[1].Mortos /
+                                                    countriesData[1]
+                                                        .Confirmados -
+                                                    countriesData[0].Mortos /
+                                                        countriesData[0]
+                                                            .Confirmados) *
+                                                100
+                                            ).toLocaleString()
+                                        }}%</span
+                                    >
                                 </h3>
                             </div>
                         </div>

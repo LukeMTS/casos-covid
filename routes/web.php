@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/api-exemplo', [ApiController::class]);
 
-Route::get('/', [ApiController::class, 'home']);
+Route::get('/', [ApiController::class, 'home'])->name('home');
 
 Route::get('/country/{state}', [ApiController::class, 'dashboard'])->name('dashboard');
 

@@ -5,6 +5,11 @@
 @endsection
 
 @section('content')
+    <div class="row container text-end mb-4">
+        <div class="col-12">
+            <a class="btn btn-secondary" href="{{ route('home') }}">Voltar</a>
+        </div>
+    </div>
     <div class="row mb-4">
         <country-table prop-data="{{ json_encode($data) }}" />
     </div>
